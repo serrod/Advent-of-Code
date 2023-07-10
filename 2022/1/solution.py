@@ -1,14 +1,15 @@
-l = []
+import heapq
 buffer = 0
-max = 0
+all = []
 f = open("input","r")
 
 for line in f:
     if line != '\n':
         buffer += int(line)
     else:
-        if buffer > max:
-            max = buffer
+        all.append(buffer)
         buffer = 0
-print(max)
 
+all.append(buffer)
+three = heapq.nlargest(3,all)
+print(sum(three))
