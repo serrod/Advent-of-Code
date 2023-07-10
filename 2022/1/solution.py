@@ -1,15 +1,20 @@
-import heapq
 buffer = 0
-all = []
+maxes = [0,0,0]
 f = open("input","r")
 
 for line in f:
     if line != '\n':
         buffer += int(line)
     else:
-        all.append(buffer)
+        if buffer > maxes[0]:
+            maxes[2] = maxes[1]
+            maxes[1] = maxes[0] 
+            maxes[0] = buffer
+        elif buffer > maxes[1]:
+            maxes[2] = maxes[1]
+            maxes[1] = buffer
+        elif buffer > maxes[2]:
+            maxes[2] = buffer
         buffer = 0
 
-all.append(buffer)
-three = heapq.nlargest(3,all)
-print(sum(three))
+print(sum(maxes))
